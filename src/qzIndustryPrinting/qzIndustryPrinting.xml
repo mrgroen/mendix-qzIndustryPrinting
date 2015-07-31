@@ -1,0 +1,149 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<widget id="qzIndustryPrinting.widget.qzIndustryPrinting" needsEntityContext="false" xmlns="http://www.mendix.com/widget/1.0/">
+  <name>qzIndustryPrinting</name>
+  <description>Widget to communicate with QZ Tray.</description>
+
+  <icon>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
+    AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAB5WNjMtfE//MIFS/zKEVP80
+    hlb/WK2E/3XUqv931az/edas/3nWrf97167/fdiv/33Yr/+A2rH/gNmx/3TEoNVqsZBrAAAABQAA
+    AAA5Xk4AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAfVTY4LHlN
+    /y5+UP8wgVL/MoRU/zWGV/9SpXv/dtWr/3fVrP951qz/edat/3vXrv992K//fdiw/3/ZsP+B2rL/
+    gdqy/4PctP+B1a//d8ShuWSkhlAAAAAAY6GFAQAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+    AAAAHlY1Pyt3S/8tfE7/Ln5Q/zCBUv8yhFT/NYVW/0uec/931qz/d9Ws/3nWrP951q3/e9eu/33Y
+    r/992LD/f9mw/4Hasv+C2rL/gtqz/4TbtP+G3LX/iN+4/3zJpv8AAAAAAAAAAAAAAAAAAAAAAAAA
+    AAAAAAAAAAAAAAAAAB5VNUUpdUn/K3lM/y18Tv8uflD/MIFS/zKEVP81hVb/RJZr/3fXrf931az/
+    edas/3nWrf97167/fdiv/33YsP9/2bD/gdqy/4Lasv+C2rP/hNu0/4bctf+G3Lb/it+5/1SHcDQA
+    AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAcVTRMJ3NI/yl3Sv8sekz/LXxO/y5+UP8wgVL/MoRU/zWF
+    Vv8+jmL/eNiu/3fVrP951qz/edat/3vXrv992K//fdiw/3/ZsP+B2rL/gtqy/4Las/+E27T/hty1
+    /4bctv+J3rj/dbybfwAAAAAAAAAAAAAAAAAAAAAAAAAAG1QzVCZxRv8ndEj/KndK/yx6TP8tfE7/
+    Ln5Q/zCBUv8yhFT/NYVW/ziGWv952a//d9Ws/3nWrP951q3/e9eu/33Yr/992LD/f9mw/4Hasv+C
+    2rL/gtqz/4TbtP+G3LX/hty2/4jdtv98yabLAAAAAAAAAAAAAAAAAAAAABhPMD0kb0T/JnNG/yh0
+    SP8qd0r/LHpM/y18Tv8uflD/MIFS/zKEVP81hVb/MX5R/3rasP931az/edas/3nWrf97167/fdiv
+    /33YsP9/2bD/gdqy/4Lasv+C2rP/hNu0/4bctf+G3Lb/iN22/4XWsf8AAAAAAAAAAAAAAAABAgIA
+    HV05cyVwRf8mc0b/KHRI/yp3Sv8sekz/LXxO/y5+UP8wgVL/MoRU/zWFVv8xg1P/c86m/3fVrP95
+    1qz/edat/3vXrv992K//fdiw/3/ZsP+B2rL/gtqy/4Las/+E27T/hty1/4bctv+I3bb/i+C5/2Kf
+    g0MFCQcAAAAAAAAAAAAeYTqKJXBF/yZzRv8odEj/KndK/yx6TP8tfE7/Ln5Q/zCBUv8yhFT/NYZX
+    /0CQZf921az/d9Ws/3nWrP951q3/e9eu/33Yr/992LD/f9mw/4Hasv+C2rL/gtqz/4TbtP+G3LX/
+    hty2/4jdtv+K37j/eMGgjgAAAAAAAAAAAAAAAB9jPKIkb0T/JnNG/yh0SP8qd0r/LHpM/y18Tv8u
+    flD/MIFS/zOEVf85iF3/ddOp/3XUqv931az/edas/3nWrf97167/fdiv/33YsP9/2bD/gdqy/4La
+    sv+C2rP/hNu0/4bctf+G3Lb/iN22/4reuP9+y6jaAAAAAAAAAAAAAAAAIGQ9uiRvRP8mc0b/KHRI
+    /yp3Sv8sekz/LXxO/y5+UP8xgVP/NINW/3DNpf901Kn/ddSq/3fVrP951qz/edat/3vXrv992K//
+    fdiw/3/ZsP+B2rL/gtqy/4Las/+E27T/hty1/4bctv+I3bb/it64/4jatf8AAAAGAAAAAAAAAAAg
+    ZT3SJG9E/yZzRv8odEj/KndK/yx6TP8tfE7/L39R/zB+Uf9qxp3/c9Op/3XUqv911qv/d8um/3jb
+    r/952K7/e9eu/33Yr/992LD/f9mw/4Hasv+C2rL/gtqz/4TbtP+G3LX/hty2/4jdtv+K3rj/jOC5
+    /2ytkFIAAAAAAAAAACBmPuokb0T/JnNG/yh0SP8qd0r/LHpM/y18T/8sek3/ZL6U/3HTqP9z06n/
+    ddWq/3a1mf93cXT/en17/3qYi/97tZv/fNKs/37csv9/2rH/gdmx/4Lasv+C2rP/hNu0/4bctf+G
+    3Lb/iN22/4reuP+L37j/fcimnwAAAAAAAAAAIGY+/yRvRP8mc0b/KHRI/yp3Sv8reUz/KnhL/1uy
+    if9x06j/cdKo/3PTqf91w6H/iIWG/9jY2P+srKz/hYWF/3FwcP94c3X/e4WB/3yjkf9/wKP/gtyz
+    /4Petf+E27T/hty1/4bctv+I3bb/it63/4fZtP9clHomAAAAAAAAAAAia0H/JG9E/yZzRv8odEj/
+    KXdK/yl3Sv9RpX3/cNOo/3HSp/9x0qj/c9Wq/3iij/+HkIz/////////////////9vb2/8zMzP+l
+    paX/fn5+/3Nwcv95dXf/fI+H/3+smP+F06//hty2/4jdtv+I27X/Y5+FOQAAAAALJBYAAAAADSNu
+    Q/8kb0T/JnNG/yh0SP8pdkn/RZZu/3DUqf9v0ab/cdKn/3HSqP9z06n/ddWq/5DUtv///////v7+
+    //7+/v/+/v7//v7+////////////7+/v/8bGxv+Xl5f/fI+G/4betv+G3LX/iN22/2qqjFUAAAAA
+    AAAAAAAAAAAdXTiqI25D/yRvRP8mc0b/J3VI/zyKYf9v1Kn/bdCl/2/Rpv9x0qf/cdKo/3PTqf91
+    1ar/rNnG///////+/v7//v7+//7+/v/+/v7//v7+//7+/v///////////+Dm4/+A2rL/hty1/4jf
+    t/9ssZJ1AAAAAAAAAAAAAAAAE0MoMSFrQf8ibkL/JG9E/yZzR/8zgFf/bdKm/23QpP9t0Kb/b9Gm
+    /3HSp/9x0qj/c9Op/3DVqP/a5uH//v7+//7+/v/+/v7//v7+//7+/v/+/v7//v7+////////////
+    1eff/4Lcs/+H3rf/cbmYlwAAAAAAAAAAAAAAAAAAAAAcXTiLIWtB/yJuQv8lcEX/LHdN/2rOov9r
+    z6P/bdCk/23Qpv9v0ab/cdKn/3HSqP9z06n/gcuq///////+/v7//v7+//7+/v/+/v7//v7+//7+
+    /v/+/v7///////////+94ND/hd22/3bDoLUAAAAACRANAAAAAAAAAAAAAAAAABxfOaAgakD/I25D
+    /yZwRv9lyJ3/as+j/2vQpP9t0KT/bdCm/2/Rpv9x0qf/cdKo/23Rpv/b5+L//f39//7+/v/+/v7/
+    /v7+//7+/v/+/v7//v7+//7+/v///////////5jVuf94yKXPAAAAAC1KPQAAAAAAAAAAAAAAAAAA
+    AAAAG1s3giFrQf8ia0H/X8CV/2jOov9qz6P/a9Ck/23QpP9t0Kb/b9Gm/3HSp/9y06j/ltC2////
+    ///+/v7//v7+//7+/v/+/v7//v7+//7+/v/+/v7//v7+///////w8vH/csih4wAAAABHd2IAAAAA
+    AAAAAAAAAAAAAAAAAAAAAAASPCQmHmY9/1i2jP9ozqH/aM6i/2rPo/9r0KT/bdCk/23Qpv9v0ab/
+    cdKn/27Mo//09PX//f39//7+/v/+/v7//v7+//7+/v/+/v7//v7+//7+/v/+/v7//////57Mt/Mg
+    OzAKVo91AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA9g2N+XbuS3mbLn/9p0KP/as+j/2vQ
+    pP9t0KT/bdCm/2/Rpv9x0qf/gc2s/8Pg0//v7+/////////////+/v7//v7+//7+/v/+/v7//v7+
+    //7+/v/Z4t7/EWVAGmSpigEAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAwcFAAAAAAAAAAAA
+    AAAAC1Ggflpdto+oYr6W927Sp/9u0qf/b9Gm/3HSp/9x0qj/ctSp/23RpP9+y6n/q9nE/9Xm3v//
+    +/3///////7+/v/+/v7/+vr6/2twby7///8AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+    AAAAAAAAAAAAAAAAAAAAAAAAHTgsAAAAAAAAAAAALlpGJFutiXNju5XBa8if/3PVqv9z1Kr/ddSp
+    /3XUqv931qz/dtar/3HNpP+U07f/vt/Q/+bs6f/JyMldAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+    AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+    AAAATY5xPWO1kYxqwZradNGo/3jXrf951qz/edat/3vXrv992rD/U6R/ZgAAAAAAAAAAAAAAAAAA
+    AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+    AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAIXKWFV2q8mKRvxJ/0fdux/2Osi4gAAAAA
+    AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+    AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAcMigAAAAAAAAA
+    AAAoRTghAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+    AP//////8P///+Af///AA///gAD//wAAH/4AAAf8AAAH+AAAB/AAAAPgAAAD4AAAA8AAAAHAAAAB
+    wAAAAcAAAAHAAAAAwAAAAcAAAAPAAAAHgAAAD4AAAA8AAAAfAAAAPwAAAH+AAAD/wAAB//gAA///
+    gAf///AP////D///////</icon>
+
+  <properties>
+    <property key="jsonEntity" type="entity" allowNonPersistableEntities="true" required="true" defaultValue="">
+      <caption>JSON entity</caption>
+      <category>Printer Command</category>
+      <description></description>
+    </property>
+    <property key="jsonAttribute" type="attribute" entityProperty="jsonEntity" required="true" defaultValue="">
+      <caption>JSON attribute</caption>
+      <category>Printer Command</category>
+      <description></description>
+      <attributeTypes>
+        <attributeType name="String" />
+      </attributeTypes>
+    </property>
+    <property key="jsonMicroflow" type="microflow" required="true" defaultValue="">
+      <caption>JSON microflow</caption>
+      <category>Printer Command</category>
+      <description></description>
+      <returnType type="Object" entityProperty="jsonEntity" />
+    </property>
+    <property key="messageEntity" type="entity" allowNonPersistableEntities="true" required="true" defaultValue="">
+      <caption>Message entity</caption>
+      <category>Request Signing</category>
+      <description></description>
+    </property>
+    <property key="messageAttribute" type="attribute" entityProperty="messageEntity" required="true" defaultValue="">
+      <caption>Message attribute</caption>
+      <category>Request Signing</category>
+      <description></description>
+      <attributeTypes>
+        <attributeType name="String" />
+      </attributeTypes>
+    </property>
+    <property key="signRequestMicroflow" type="microflow" entityProperty="messageEntity" required="false" defaultValue="">
+      <caption>Sign request microflow</caption>
+      <category>Request Signing</category>
+      <description></description>
+      <returnType type="String" />
+    </property>
+    <property key="siteCertificateMicroflow" type="microflow" required="false" defaultValue="">
+      <caption>Site certificate microflow</caption>
+      <category>Certificate</category>
+      <description></description>
+      <returnType type="String" />
+    </property>
+  </properties>
+</widget>
