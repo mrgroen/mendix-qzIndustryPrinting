@@ -202,6 +202,7 @@ define([
         if (jsonObj !== null) {
           // Automatically gets called when "qz.findPrinter()" is finished.
           window.qzDoneFinding = function(){
+            var commands = [];
             // loop commands
             dojoArray.forEach(jsonObj.commands,function(value,key){
               if (value.hasOwnProperty("chars")) {
@@ -209,11 +210,14 @@ define([
                 dojoArray.forEach(value.chars,function(value,key){
                   charsCommand = charsCommand + window.qzLib.chr(value);
                 });
-                window.qz.append(charsCommand);
+                //window.qz.append(charsCommand);
+                commands.push(charsCommand);
               } else if (value.hasOwnProperty("append")) {
-                window.qz.append(value.append);
+                //window.qz.append(value.append);
+                commands.push(value.append);
               }
             });
+            window.qz.append(commands.join(""));
             window.qz.print();
             // Remove reference to this function.
             window.qzDoneFinding = null;
