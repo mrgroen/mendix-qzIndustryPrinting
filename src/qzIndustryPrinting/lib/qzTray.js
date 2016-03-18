@@ -250,30 +250,9 @@ function(lang, _jQuery) {
                   this.qzNoConnection();
               }
           },
-
-          connectionSuccess: function (websocket) {
-              console.log('Websocket connection successful');
-
-              websocket.sendObj = lang.hitch(this,function(objMsg) {
-                var msg = JSON.stringify(objMsg);
-
-                console.log("Sending " + msg);
-                var ws = this.websocket;
-
-                // Determine if the message requires signing
-                if (objMsg.method === 'listMessages' || Object.keys(this.qzConfig.preemptive).indexOf(objMsg.method) !== -1) {
-                  ws.send(msg);
-                } else {
-                  this.signRequest(msg,
-                    function(signature) {
-                      ws.send(signature + msg);
-                    }
-                  );
-                }
-              });
-
-              websocket.onmessage = lang.hitch(this,function(evt) {
-                  var message = JSON.parse(evt.data);
+		  
+		  printBon: function (evt) {
+			  var message = JSON.parse(evt.data);
 
                   if (message.error !== undefined) {
                       console.log(message.error);
@@ -341,6 +320,7 @@ function(lang, _jQuery) {
                                 window[message.callback].apply(this, message.result);
                               } else {
                                 console.warn("Callback [" + message.callback + "] is not defined.");
+								printBon(evt);
                               }
                           } catch(err) {
                               console.error(err);
@@ -349,7 +329,110 @@ function(lang, _jQuery) {
                   }
 
                   console.log("Finished processing message");
+		  },
+	
+          connectionSuccess: function (websocket) {
+              console.log('Websocket connection successful');
+
+              websocket.sendObj = lang.hitch(this,function(objMsg) {
+                var msg = JSON.stringify(objMsg);
+
+                console.log("Sending " + msg);
+                var ws = this.websocket;
+
+                // Determine if the message requires signing
+                if (objMsg.method === 'listMessages' || Object.keys(this.qzConfig.preemptive).indexOf(objMsg.method) !== -1) {
+                  ws.send(msg);
+                } else {
+                  this.signRequest(msg,
+                    function(signature) {
+                      ws.send(signature + msg);
+                    }
+                  );
+                }
               });
+
+              websocket.onmessage = lang.hitch(this,function(evt) {
+				  
+			  printBon(evt);
+                  /*var message = JSON.parse(evt.data);
+
+                  if (message.error !== undefined) {
+                      console.log(message.error);
+                      return;
+                  }
+
+                  // After we ask for the list, the value will come back as a message.
+                  // That means we have to deal with the listMessages separately from everything else.
+                  if (message.method === 'listMessages') {
+                      // Take the list of messages and add them to the qz object
+                      this.mapMethods(websocket, message.result);
+
+                  } else {
+                      // Got a return value from a call
+                      console.log('Message:');
+                      console.log(message);
+
+                      if (typeof message.result === 'string') {
+                          //unescape special characters
+                          message.result = message.result.replace(/%5C/g, "\\").replace(/%22/g, "\"");
+
+                          //ensure boolean strings are read as booleans
+                          if (message.result === "true" || message.result === "false") {
+                              message.result = (message.result === "true");
+                          }
+
+                          if (message.result.substring(0, 1) === '[') {
+                              message.result = JSON.parse(message.result);
+                          }
+
+                          //ensure null is read as null
+                          if (message.result === "null") {
+                              message.result = null;
+                          }
+                      }
+
+                      if (message.callback !== 'setupMethods' && message.result !== undefined && message.result.constructor !== Array) {
+                          message.result = [message.result];
+                      }
+
+                      // Special case for getException
+                      if (message.method === 'getException') {
+                          var result = message.result;
+                          message.result = {
+                              getLocalizedMessage: function() {
+                                  return result;
+                              }
+                          };
+                      }
+
+                      if (message.callback === 'setupMethods') {
+                          console.log("Resetting function call");
+                          console.log(message.result);
+                          window.qz[message.method] = function() {
+                              return message.result;
+                          };
+                      }
+
+                      if (message.callback !== null) {
+                          try {
+                              console.log("Callbacking: " + message.callback);
+                              if (typeof window.qz[message.callback] !== "undefined") {
+                                window.qz[message.callback].apply(this, message.init ? [message.method] : message.result);
+                              } else if (typeof window[message.callback] !== "undefined") {
+                                window[message.callback].apply(this, message.result);
+                              } else {
+                                console.warn("Callback [" + message.callback + "] is not defined.");
+								
+                              }
+                          } catch(err) {
+                              console.error(err);
+                          }
+                      }
+                  }
+
+                  console.log("Finished processing message");
+              });*/
           },
 
           createQZ: function (websocket) {
