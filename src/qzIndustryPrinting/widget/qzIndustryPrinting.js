@@ -42,7 +42,7 @@ define([
   // External libraries
   _jQuery,
   _qzTray
-
+  
 ) {
 
   "use strict";
@@ -62,7 +62,7 @@ define([
       messageAttribute: "",
       signRequestMicroflow: "",
       siteCertificateMicroflow: "",
-
+    
       /* END - Parameters configured in the Modeler. */
 
       // Internal variables. Non-primitives created in the prototype are shared between all widget instances.
@@ -103,7 +103,7 @@ define([
             }
           });
         }
-
+        
         // create sign request function
         window.qzLib.signing = {};
         window.qzLib.signing.signRequestMicroflow = this.signRequestMicroflow;
@@ -230,14 +230,13 @@ define([
           }
         }
       },
-
+    
       // set mendix data subscriptions
-      // YOLO
       _addSubscriptions: function(){
 
           if (this._mxObj !== null){
             var jsonEntitySubscription = mx.data.subscribe({
-              guid: this._mxObj.getGUID(),
+              guid: this._mxObj.getGuid(),
               callback: lang.hitch(this, function (guid) {
                 console.log("Recieved change on QZ print command entity: " + guid);
                 mx.data.get({
@@ -256,7 +255,7 @@ define([
             });
             this._handles.push(jsonEntitySubscription);
           }
-
+        
       },
 
       // run a mendix microflow
