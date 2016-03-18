@@ -4,25 +4,19 @@
 
 package qzindustryprinting.proxies;
 
-import com.mendix.core.Core;
-import com.mendix.core.CoreException;
-import com.mendix.systemwideinterfaces.core.IContext;
-import com.mendix.systemwideinterfaces.core.IMendixIdentifier;
-import com.mendix.systemwideinterfaces.core.IMendixObject;
-
 /**
  * 
  */
 public class Command
 {
-	private final IMendixObject commandMendixObject;
+	private final com.mendix.systemwideinterfaces.core.IMendixObject commandMendixObject;
 
-	private final IContext context;
+	private final com.mendix.systemwideinterfaces.core.IContext context;
 
 	/**
 	 * Internal name of this entity
 	 */
-	public static final String entityName = "qzIndustryPrinting.Command";
+	public static final java.lang.String entityName = "qzIndustryPrinting.Command";
 
 	/**
 	 * Enum describing members of this entity
@@ -32,31 +26,31 @@ public class Command
 		JSON("JSON"),
 		Command_User("qzIndustryPrinting.Command_User");
 
-		private String metaName;
+		private java.lang.String metaName;
 
-		MemberNames(String s)
+		MemberNames(java.lang.String s)
 		{
 			metaName = s;
 		}
 
 		@Override
-		public String toString()
+		public java.lang.String toString()
 		{
 			return metaName;
 		}
 	}
 
-	public Command(IContext context)
+	public Command(com.mendix.systemwideinterfaces.core.IContext context)
 	{
-		this(context, Core.instantiate(context, "qzIndustryPrinting.Command"));
+		this(context, com.mendix.core.Core.instantiate(context, "qzIndustryPrinting.Command"));
 	}
 
-	protected Command(IContext context, IMendixObject commandMendixObject)
+	protected Command(com.mendix.systemwideinterfaces.core.IContext context, com.mendix.systemwideinterfaces.core.IMendixObject commandMendixObject)
 	{
 		if (commandMendixObject == null)
-			throw new IllegalArgumentException("The given object cannot be null.");
-		if (!Core.isSubClassOf("qzIndustryPrinting.Command", commandMendixObject.getType()))
-			throw new IllegalArgumentException("The given object is not a qzIndustryPrinting.Command");
+			throw new java.lang.IllegalArgumentException("The given object cannot be null.");
+		if (!com.mendix.core.Core.isSubClassOf("qzIndustryPrinting.Command", commandMendixObject.getType()))
+			throw new java.lang.IllegalArgumentException("The given object is not a qzIndustryPrinting.Command");
 
 		this.commandMendixObject = commandMendixObject;
 		this.context = context;
@@ -66,7 +60,7 @@ public class Command
 	 * @deprecated Use 'Command.load(IContext, IMendixIdentifier)' instead.
 	 */
 	@Deprecated
-	public static qzindustryprinting.proxies.Command initialize(IContext context, IMendixIdentifier mendixIdentifier) throws CoreException
+	public static qzindustryprinting.proxies.Command initialize(com.mendix.systemwideinterfaces.core.IContext context, com.mendix.systemwideinterfaces.core.IMendixIdentifier mendixIdentifier) throws com.mendix.core.CoreException
 	{
 		return qzindustryprinting.proxies.Command.load(context, mendixIdentifier);
 	}
@@ -75,31 +69,31 @@ public class Command
 	 * Initialize a proxy using context (recommended). This context will be used for security checking when the get- and set-methods without context parameters are called.
 	 * The get- and set-methods with context parameter should be used when for instance sudo access is necessary (IContext.getSudoContext() can be used to obtain sudo access).
 	 */
-	public static qzindustryprinting.proxies.Command initialize(IContext context, IMendixObject mendixObject)
+	public static qzindustryprinting.proxies.Command initialize(com.mendix.systemwideinterfaces.core.IContext context, com.mendix.systemwideinterfaces.core.IMendixObject mendixObject)
 	{
 		return new qzindustryprinting.proxies.Command(context, mendixObject);
 	}
 
-	public static qzindustryprinting.proxies.Command load(IContext context, IMendixIdentifier mendixIdentifier) throws CoreException
+	public static qzindustryprinting.proxies.Command load(com.mendix.systemwideinterfaces.core.IContext context, com.mendix.systemwideinterfaces.core.IMendixIdentifier mendixIdentifier) throws com.mendix.core.CoreException
 	{
-		IMendixObject mendixObject = Core.retrieveId(context, mendixIdentifier);
+		com.mendix.systemwideinterfaces.core.IMendixObject mendixObject = com.mendix.core.Core.retrieveId(context, mendixIdentifier);
 		return qzindustryprinting.proxies.Command.initialize(context, mendixObject);
 	}
 
 	/**
 	 * Commit the changes made on this proxy object.
 	 */
-	public final void commit() throws CoreException
+	public final void commit() throws com.mendix.core.CoreException
 	{
-		Core.commit(context, getMendixObject());
+		com.mendix.core.Core.commit(context, getMendixObject());
 	}
 
 	/**
 	 * Commit the changes made on this proxy object using the specified context.
 	 */
-	public final void commit(IContext context) throws CoreException
+	public final void commit(com.mendix.systemwideinterfaces.core.IContext context) throws com.mendix.core.CoreException
 	{
-		Core.commit(context, getMendixObject());
+		com.mendix.core.Core.commit(context, getMendixObject());
 	}
 
 	/**
@@ -107,15 +101,15 @@ public class Command
 	 */
 	public final void delete()
 	{
-		Core.delete(context, getMendixObject());
+		com.mendix.core.Core.delete(context, getMendixObject());
 	}
 
 	/**
 	 * Delete the object using the specified context.
 	 */
-	public final void delete(IContext context)
+	public final void delete(com.mendix.systemwideinterfaces.core.IContext context)
 	{
-		Core.delete(context, getMendixObject());
+		com.mendix.core.Core.delete(context, getMendixObject());
 	}
 	/**
 	 * @return value of JSON
@@ -129,7 +123,7 @@ public class Command
 	 * @param context
 	 * @return value of JSON
 	 */
-	public final String getJSON(IContext context)
+	public final String getJSON(com.mendix.systemwideinterfaces.core.IContext context)
 	{
 		return (String) getMendixObject().getValue(context, MemberNames.JSON.toString());
 	}
@@ -148,7 +142,7 @@ public class Command
 	 * @param context
 	 * @param json
 	 */
-	public final void setJSON(IContext context, String json)
+	public final void setJSON(com.mendix.systemwideinterfaces.core.IContext context, String json)
 	{
 		getMendixObject().setValue(context, MemberNames.JSON.toString(), json);
 	}
@@ -156,7 +150,7 @@ public class Command
 	/**
 	 * @return value of Command_User
 	 */
-	public final system.proxies.User getCommand_User() throws CoreException
+	public final system.proxies.User getCommand_User() throws com.mendix.core.CoreException
 	{
 		return getCommand_User(getContext());
 	}
@@ -165,10 +159,10 @@ public class Command
 	 * @param context
 	 * @return value of Command_User
 	 */
-	public final system.proxies.User getCommand_User(IContext context) throws CoreException
+	public final system.proxies.User getCommand_User(com.mendix.systemwideinterfaces.core.IContext context) throws com.mendix.core.CoreException
 	{
 		system.proxies.User result = null;
-		IMendixIdentifier identifier = getMendixObject().getValue(context, MemberNames.Command_User.toString());
+		com.mendix.systemwideinterfaces.core.IMendixIdentifier identifier = getMendixObject().getValue(context, MemberNames.Command_User.toString());
 		if (identifier != null)
 			result = system.proxies.User.load(context, identifier);
 		return result;
@@ -188,7 +182,7 @@ public class Command
 	 * @param context
 	 * @param command_user
 	 */
-	public final void setCommand_User(IContext context, system.proxies.User command_user)
+	public final void setCommand_User(com.mendix.systemwideinterfaces.core.IContext context, system.proxies.User command_user)
 	{
 		if (command_user == null)
 			getMendixObject().setValue(context, MemberNames.Command_User.toString(), null);
@@ -199,7 +193,7 @@ public class Command
 	/**
 	 * @return the IMendixObject instance of this proxy for use in the Core interface.
 	 */
-	public final IMendixObject getMendixObject()
+	public final com.mendix.systemwideinterfaces.core.IMendixObject getMendixObject()
 	{
 		return commandMendixObject;
 	}
@@ -207,7 +201,7 @@ public class Command
 	/**
 	 * @return the IContext instance of this proxy, or null if no IContext instance was specified at initialization.
 	 */
-	public final IContext getContext()
+	public final com.mendix.systemwideinterfaces.core.IContext getContext()
 	{
 		return context;
 	}
@@ -235,7 +229,7 @@ public class Command
 	/**
 	 * @return String name of this class
 	 */
-	public static String getType()
+	public static java.lang.String getType()
 	{
 		return "qzIndustryPrinting.Command";
 	}
@@ -245,7 +239,7 @@ public class Command
 	 * @deprecated Use getMendixObject().getId().toLong() to get a unique identifier for this object.
 	 */
 	@Deprecated
-	public String getGUID()
+	public java.lang.String getGUID()
 	{
 		return "ID_" + getMendixObject().getId().toLong();
 	}

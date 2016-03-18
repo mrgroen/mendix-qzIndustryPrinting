@@ -4,12 +4,6 @@
 
 package qzindustryprinting.proxies;
 
-import com.mendix.core.Core;
-import com.mendix.core.CoreException;
-import com.mendix.systemwideinterfaces.core.IContext;
-import com.mendix.systemwideinterfaces.core.IMendixIdentifier;
-import com.mendix.systemwideinterfaces.core.IMendixObject;
-
 /**
  * 
  */
@@ -18,7 +12,7 @@ public class SigningKey extends system.proxies.FileDocument
 	/**
 	 * Internal name of this entity
 	 */
-	public static final String entityName = "qzIndustryPrinting.SigningKey";
+	public static final java.lang.String entityName = "qzIndustryPrinting.SigningKey";
 
 	/**
 	 * Enum describing members of this entity
@@ -31,37 +25,37 @@ public class SigningKey extends system.proxies.FileDocument
 		Contents("Contents"),
 		HasContents("HasContents");
 
-		private String metaName;
+		private java.lang.String metaName;
 
-		MemberNames(String s)
+		MemberNames(java.lang.String s)
 		{
 			metaName = s;
 		}
 
 		@Override
-		public String toString()
+		public java.lang.String toString()
 		{
 			return metaName;
 		}
 	}
 
-	public SigningKey(IContext context)
+	public SigningKey(com.mendix.systemwideinterfaces.core.IContext context)
 	{
-		this(context, Core.instantiate(context, "qzIndustryPrinting.SigningKey"));
+		this(context, com.mendix.core.Core.instantiate(context, "qzIndustryPrinting.SigningKey"));
 	}
 
-	protected SigningKey(IContext context, IMendixObject signingKeyMendixObject)
+	protected SigningKey(com.mendix.systemwideinterfaces.core.IContext context, com.mendix.systemwideinterfaces.core.IMendixObject signingKeyMendixObject)
 	{
 		super(context, signingKeyMendixObject);
-		if (!Core.isSubClassOf("qzIndustryPrinting.SigningKey", signingKeyMendixObject.getType()))
-			throw new IllegalArgumentException("The given object is not a qzIndustryPrinting.SigningKey");
+		if (!com.mendix.core.Core.isSubClassOf("qzIndustryPrinting.SigningKey", signingKeyMendixObject.getType()))
+			throw new java.lang.IllegalArgumentException("The given object is not a qzIndustryPrinting.SigningKey");
 	}
 
 	/**
 	 * @deprecated Use 'SigningKey.load(IContext, IMendixIdentifier)' instead.
 	 */
 	@Deprecated
-	public static qzindustryprinting.proxies.SigningKey initialize(IContext context, IMendixIdentifier mendixIdentifier) throws CoreException
+	public static qzindustryprinting.proxies.SigningKey initialize(com.mendix.systemwideinterfaces.core.IContext context, com.mendix.systemwideinterfaces.core.IMendixIdentifier mendixIdentifier) throws com.mendix.core.CoreException
 	{
 		return qzindustryprinting.proxies.SigningKey.load(context, mendixIdentifier);
 	}
@@ -70,21 +64,21 @@ public class SigningKey extends system.proxies.FileDocument
 	 * Initialize a proxy using context (recommended). This context will be used for security checking when the get- and set-methods without context parameters are called.
 	 * The get- and set-methods with context parameter should be used when for instance sudo access is necessary (IContext.getSudoContext() can be used to obtain sudo access).
 	 */
-	public static qzindustryprinting.proxies.SigningKey initialize(IContext context, IMendixObject mendixObject)
+	public static qzindustryprinting.proxies.SigningKey initialize(com.mendix.systemwideinterfaces.core.IContext context, com.mendix.systemwideinterfaces.core.IMendixObject mendixObject)
 	{
 		return new qzindustryprinting.proxies.SigningKey(context, mendixObject);
 	}
 
-	public static qzindustryprinting.proxies.SigningKey load(IContext context, IMendixIdentifier mendixIdentifier) throws CoreException
+	public static qzindustryprinting.proxies.SigningKey load(com.mendix.systemwideinterfaces.core.IContext context, com.mendix.systemwideinterfaces.core.IMendixIdentifier mendixIdentifier) throws com.mendix.core.CoreException
 	{
-		IMendixObject mendixObject = Core.retrieveId(context, mendixIdentifier);
+		com.mendix.systemwideinterfaces.core.IMendixObject mendixObject = com.mendix.core.Core.retrieveId(context, mendixIdentifier);
 		return qzindustryprinting.proxies.SigningKey.initialize(context, mendixObject);
 	}
 
-	public static java.util.List<qzindustryprinting.proxies.SigningKey> load(IContext context, String xpathConstraint) throws CoreException
+	public static java.util.List<qzindustryprinting.proxies.SigningKey> load(com.mendix.systemwideinterfaces.core.IContext context, java.lang.String xpathConstraint) throws com.mendix.core.CoreException
 	{
 		java.util.List<qzindustryprinting.proxies.SigningKey> result = new java.util.ArrayList<qzindustryprinting.proxies.SigningKey>();
-		for (IMendixObject obj : Core.retrieveXPathQuery(context, "//qzIndustryPrinting.SigningKey" + xpathConstraint))
+		for (com.mendix.systemwideinterfaces.core.IMendixObject obj : com.mendix.core.Core.retrieveXPathQuery(context, "//qzIndustryPrinting.SigningKey" + xpathConstraint))
 			result.add(qzindustryprinting.proxies.SigningKey.initialize(context, obj));
 		return result;
 	}
@@ -112,7 +106,7 @@ public class SigningKey extends system.proxies.FileDocument
 	/**
 	 * @return String name of this class
 	 */
-	public static String getType()
+	public static java.lang.String getType()
 	{
 		return "qzIndustryPrinting.SigningKey";
 	}
@@ -123,7 +117,7 @@ public class SigningKey extends system.proxies.FileDocument
 	 */
 	@Override
 	@Deprecated
-	public String getGUID()
+	public java.lang.String getGUID()
 	{
 		return "ID_" + getMendixObject().getId().toLong();
 	}

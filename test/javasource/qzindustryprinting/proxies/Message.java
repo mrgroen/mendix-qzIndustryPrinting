@@ -4,25 +4,19 @@
 
 package qzindustryprinting.proxies;
 
-import com.mendix.core.Core;
-import com.mendix.core.CoreException;
-import com.mendix.systemwideinterfaces.core.IContext;
-import com.mendix.systemwideinterfaces.core.IMendixIdentifier;
-import com.mendix.systemwideinterfaces.core.IMendixObject;
-
 /**
  * 
  */
 public class Message
 {
-	private final IMendixObject messageMendixObject;
+	private final com.mendix.systemwideinterfaces.core.IMendixObject messageMendixObject;
 
-	private final IContext context;
+	private final com.mendix.systemwideinterfaces.core.IContext context;
 
 	/**
 	 * Internal name of this entity
 	 */
-	public static final String entityName = "qzIndustryPrinting.Message";
+	public static final java.lang.String entityName = "qzIndustryPrinting.Message";
 
 	/**
 	 * Enum describing members of this entity
@@ -31,31 +25,31 @@ public class Message
 	{
 		Body("Body");
 
-		private String metaName;
+		private java.lang.String metaName;
 
-		MemberNames(String s)
+		MemberNames(java.lang.String s)
 		{
 			metaName = s;
 		}
 
 		@Override
-		public String toString()
+		public java.lang.String toString()
 		{
 			return metaName;
 		}
 	}
 
-	public Message(IContext context)
+	public Message(com.mendix.systemwideinterfaces.core.IContext context)
 	{
-		this(context, Core.instantiate(context, "qzIndustryPrinting.Message"));
+		this(context, com.mendix.core.Core.instantiate(context, "qzIndustryPrinting.Message"));
 	}
 
-	protected Message(IContext context, IMendixObject messageMendixObject)
+	protected Message(com.mendix.systemwideinterfaces.core.IContext context, com.mendix.systemwideinterfaces.core.IMendixObject messageMendixObject)
 	{
 		if (messageMendixObject == null)
-			throw new IllegalArgumentException("The given object cannot be null.");
-		if (!Core.isSubClassOf("qzIndustryPrinting.Message", messageMendixObject.getType()))
-			throw new IllegalArgumentException("The given object is not a qzIndustryPrinting.Message");
+			throw new java.lang.IllegalArgumentException("The given object cannot be null.");
+		if (!com.mendix.core.Core.isSubClassOf("qzIndustryPrinting.Message", messageMendixObject.getType()))
+			throw new java.lang.IllegalArgumentException("The given object is not a qzIndustryPrinting.Message");
 
 		this.messageMendixObject = messageMendixObject;
 		this.context = context;
@@ -65,7 +59,7 @@ public class Message
 	 * @deprecated Use 'Message.load(IContext, IMendixIdentifier)' instead.
 	 */
 	@Deprecated
-	public static qzindustryprinting.proxies.Message initialize(IContext context, IMendixIdentifier mendixIdentifier) throws CoreException
+	public static qzindustryprinting.proxies.Message initialize(com.mendix.systemwideinterfaces.core.IContext context, com.mendix.systemwideinterfaces.core.IMendixIdentifier mendixIdentifier) throws com.mendix.core.CoreException
 	{
 		return qzindustryprinting.proxies.Message.load(context, mendixIdentifier);
 	}
@@ -74,31 +68,31 @@ public class Message
 	 * Initialize a proxy using context (recommended). This context will be used for security checking when the get- and set-methods without context parameters are called.
 	 * The get- and set-methods with context parameter should be used when for instance sudo access is necessary (IContext.getSudoContext() can be used to obtain sudo access).
 	 */
-	public static qzindustryprinting.proxies.Message initialize(IContext context, IMendixObject mendixObject)
+	public static qzindustryprinting.proxies.Message initialize(com.mendix.systemwideinterfaces.core.IContext context, com.mendix.systemwideinterfaces.core.IMendixObject mendixObject)
 	{
 		return new qzindustryprinting.proxies.Message(context, mendixObject);
 	}
 
-	public static qzindustryprinting.proxies.Message load(IContext context, IMendixIdentifier mendixIdentifier) throws CoreException
+	public static qzindustryprinting.proxies.Message load(com.mendix.systemwideinterfaces.core.IContext context, com.mendix.systemwideinterfaces.core.IMendixIdentifier mendixIdentifier) throws com.mendix.core.CoreException
 	{
-		IMendixObject mendixObject = Core.retrieveId(context, mendixIdentifier);
+		com.mendix.systemwideinterfaces.core.IMendixObject mendixObject = com.mendix.core.Core.retrieveId(context, mendixIdentifier);
 		return qzindustryprinting.proxies.Message.initialize(context, mendixObject);
 	}
 
 	/**
 	 * Commit the changes made on this proxy object.
 	 */
-	public final void commit() throws CoreException
+	public final void commit() throws com.mendix.core.CoreException
 	{
-		Core.commit(context, getMendixObject());
+		com.mendix.core.Core.commit(context, getMendixObject());
 	}
 
 	/**
 	 * Commit the changes made on this proxy object using the specified context.
 	 */
-	public final void commit(IContext context) throws CoreException
+	public final void commit(com.mendix.systemwideinterfaces.core.IContext context) throws com.mendix.core.CoreException
 	{
-		Core.commit(context, getMendixObject());
+		com.mendix.core.Core.commit(context, getMendixObject());
 	}
 
 	/**
@@ -106,15 +100,15 @@ public class Message
 	 */
 	public final void delete()
 	{
-		Core.delete(context, getMendixObject());
+		com.mendix.core.Core.delete(context, getMendixObject());
 	}
 
 	/**
 	 * Delete the object using the specified context.
 	 */
-	public final void delete(IContext context)
+	public final void delete(com.mendix.systemwideinterfaces.core.IContext context)
 	{
-		Core.delete(context, getMendixObject());
+		com.mendix.core.Core.delete(context, getMendixObject());
 	}
 	/**
 	 * @return value of Body
@@ -128,7 +122,7 @@ public class Message
 	 * @param context
 	 * @return value of Body
 	 */
-	public final String getBody(IContext context)
+	public final String getBody(com.mendix.systemwideinterfaces.core.IContext context)
 	{
 		return (String) getMendixObject().getValue(context, MemberNames.Body.toString());
 	}
@@ -147,7 +141,7 @@ public class Message
 	 * @param context
 	 * @param body
 	 */
-	public final void setBody(IContext context, String body)
+	public final void setBody(com.mendix.systemwideinterfaces.core.IContext context, String body)
 	{
 		getMendixObject().setValue(context, MemberNames.Body.toString(), body);
 	}
@@ -155,7 +149,7 @@ public class Message
 	/**
 	 * @return the IMendixObject instance of this proxy for use in the Core interface.
 	 */
-	public final IMendixObject getMendixObject()
+	public final com.mendix.systemwideinterfaces.core.IMendixObject getMendixObject()
 	{
 		return messageMendixObject;
 	}
@@ -163,7 +157,7 @@ public class Message
 	/**
 	 * @return the IContext instance of this proxy, or null if no IContext instance was specified at initialization.
 	 */
-	public final IContext getContext()
+	public final com.mendix.systemwideinterfaces.core.IContext getContext()
 	{
 		return context;
 	}
@@ -191,7 +185,7 @@ public class Message
 	/**
 	 * @return String name of this class
 	 */
-	public static String getType()
+	public static java.lang.String getType()
 	{
 		return "qzIndustryPrinting.Message";
 	}
@@ -201,7 +195,7 @@ public class Message
 	 * @deprecated Use getMendixObject().getId().toLong() to get a unique identifier for this object.
 	 */
 	@Deprecated
-	public String getGUID()
+	public java.lang.String getGUID()
 	{
 		return "ID_" + getMendixObject().getId().toLong();
 	}

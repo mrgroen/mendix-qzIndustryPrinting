@@ -4,25 +4,19 @@
 
 package testsuite.proxies;
 
-import com.mendix.core.Core;
-import com.mendix.core.CoreException;
-import com.mendix.systemwideinterfaces.core.IContext;
-import com.mendix.systemwideinterfaces.core.IMendixIdentifier;
-import com.mendix.systemwideinterfaces.core.IMendixObject;
-
 /**
  * 
  */
 public class Color
 {
-	private final IMendixObject colorMendixObject;
+	private final com.mendix.systemwideinterfaces.core.IMendixObject colorMendixObject;
 
-	private final IContext context;
+	private final com.mendix.systemwideinterfaces.core.IContext context;
 
 	/**
 	 * Internal name of this entity
 	 */
-	public static final String entityName = "TestSuite.Color";
+	public static final java.lang.String entityName = "TestSuite.Color";
 
 	/**
 	 * Enum describing members of this entity
@@ -34,31 +28,31 @@ public class Color
 		IsPrimary("IsPrimary"),
 		ColorCode("ColorCode");
 
-		private String metaName;
+		private java.lang.String metaName;
 
-		MemberNames(String s)
+		MemberNames(java.lang.String s)
 		{
 			metaName = s;
 		}
 
 		@Override
-		public String toString()
+		public java.lang.String toString()
 		{
 			return metaName;
 		}
 	}
 
-	public Color(IContext context)
+	public Color(com.mendix.systemwideinterfaces.core.IContext context)
 	{
-		this(context, Core.instantiate(context, "TestSuite.Color"));
+		this(context, com.mendix.core.Core.instantiate(context, "TestSuite.Color"));
 	}
 
-	protected Color(IContext context, IMendixObject colorMendixObject)
+	protected Color(com.mendix.systemwideinterfaces.core.IContext context, com.mendix.systemwideinterfaces.core.IMendixObject colorMendixObject)
 	{
 		if (colorMendixObject == null)
-			throw new IllegalArgumentException("The given object cannot be null.");
-		if (!Core.isSubClassOf("TestSuite.Color", colorMendixObject.getType()))
-			throw new IllegalArgumentException("The given object is not a TestSuite.Color");
+			throw new java.lang.IllegalArgumentException("The given object cannot be null.");
+		if (!com.mendix.core.Core.isSubClassOf("TestSuite.Color", colorMendixObject.getType()))
+			throw new java.lang.IllegalArgumentException("The given object is not a TestSuite.Color");
 
 		this.colorMendixObject = colorMendixObject;
 		this.context = context;
@@ -68,7 +62,7 @@ public class Color
 	 * @deprecated Use 'Color.load(IContext, IMendixIdentifier)' instead.
 	 */
 	@Deprecated
-	public static testsuite.proxies.Color initialize(IContext context, IMendixIdentifier mendixIdentifier) throws CoreException
+	public static testsuite.proxies.Color initialize(com.mendix.systemwideinterfaces.core.IContext context, com.mendix.systemwideinterfaces.core.IMendixIdentifier mendixIdentifier) throws com.mendix.core.CoreException
 	{
 		return testsuite.proxies.Color.load(context, mendixIdentifier);
 	}
@@ -77,31 +71,31 @@ public class Color
 	 * Initialize a proxy using context (recommended). This context will be used for security checking when the get- and set-methods without context parameters are called.
 	 * The get- and set-methods with context parameter should be used when for instance sudo access is necessary (IContext.getSudoContext() can be used to obtain sudo access).
 	 */
-	public static testsuite.proxies.Color initialize(IContext context, IMendixObject mendixObject)
+	public static testsuite.proxies.Color initialize(com.mendix.systemwideinterfaces.core.IContext context, com.mendix.systemwideinterfaces.core.IMendixObject mendixObject)
 	{
 		return new testsuite.proxies.Color(context, mendixObject);
 	}
 
-	public static testsuite.proxies.Color load(IContext context, IMendixIdentifier mendixIdentifier) throws CoreException
+	public static testsuite.proxies.Color load(com.mendix.systemwideinterfaces.core.IContext context, com.mendix.systemwideinterfaces.core.IMendixIdentifier mendixIdentifier) throws com.mendix.core.CoreException
 	{
-		IMendixObject mendixObject = Core.retrieveId(context, mendixIdentifier);
+		com.mendix.systemwideinterfaces.core.IMendixObject mendixObject = com.mendix.core.Core.retrieveId(context, mendixIdentifier);
 		return testsuite.proxies.Color.initialize(context, mendixObject);
 	}
 
 	/**
 	 * Commit the changes made on this proxy object.
 	 */
-	public final void commit() throws CoreException
+	public final void commit() throws com.mendix.core.CoreException
 	{
-		Core.commit(context, getMendixObject());
+		com.mendix.core.Core.commit(context, getMendixObject());
 	}
 
 	/**
 	 * Commit the changes made on this proxy object using the specified context.
 	 */
-	public final void commit(IContext context) throws CoreException
+	public final void commit(com.mendix.systemwideinterfaces.core.IContext context) throws com.mendix.core.CoreException
 	{
-		Core.commit(context, getMendixObject());
+		com.mendix.core.Core.commit(context, getMendixObject());
 	}
 
 	/**
@@ -109,15 +103,15 @@ public class Color
 	 */
 	public final void delete()
 	{
-		Core.delete(context, getMendixObject());
+		com.mendix.core.Core.delete(context, getMendixObject());
 	}
 
 	/**
 	 * Delete the object using the specified context.
 	 */
-	public final void delete(IContext context)
+	public final void delete(com.mendix.systemwideinterfaces.core.IContext context)
 	{
-		Core.delete(context, getMendixObject());
+		com.mendix.core.Core.delete(context, getMendixObject());
 	}
 	/**
 	 * @return value of Name
@@ -131,7 +125,7 @@ public class Color
 	 * @param context
 	 * @return value of Name
 	 */
-	public final String getName(IContext context)
+	public final String getName(com.mendix.systemwideinterfaces.core.IContext context)
 	{
 		return (String) getMendixObject().getValue(context, MemberNames.Name.toString());
 	}
@@ -150,7 +144,7 @@ public class Color
 	 * @param context
 	 * @param name
 	 */
-	public final void setName(IContext context, String name)
+	public final void setName(com.mendix.systemwideinterfaces.core.IContext context, String name)
 	{
 		getMendixObject().setValue(context, MemberNames.Name.toString(), name);
 	}
@@ -167,7 +161,7 @@ public class Color
 	 * @param context
 	 * @return value of RAL
 	 */
-	public final Integer getRAL(IContext context)
+	public final Integer getRAL(com.mendix.systemwideinterfaces.core.IContext context)
 	{
 		return (Integer) getMendixObject().getValue(context, MemberNames.RAL.toString());
 	}
@@ -186,7 +180,7 @@ public class Color
 	 * @param context
 	 * @param ral
 	 */
-	public final void setRAL(IContext context, Integer ral)
+	public final void setRAL(com.mendix.systemwideinterfaces.core.IContext context, Integer ral)
 	{
 		getMendixObject().setValue(context, MemberNames.RAL.toString(), ral);
 	}
@@ -203,7 +197,7 @@ public class Color
 	 * @param context
 	 * @return value of IsPrimary
 	 */
-	public final Boolean getIsPrimary(IContext context)
+	public final Boolean getIsPrimary(com.mendix.systemwideinterfaces.core.IContext context)
 	{
 		return (Boolean) getMendixObject().getValue(context, MemberNames.IsPrimary.toString());
 	}
@@ -222,7 +216,7 @@ public class Color
 	 * @param context
 	 * @param isprimary
 	 */
-	public final void setIsPrimary(IContext context, Boolean isprimary)
+	public final void setIsPrimary(com.mendix.systemwideinterfaces.core.IContext context, Boolean isprimary)
 	{
 		getMendixObject().setValue(context, MemberNames.IsPrimary.toString(), isprimary);
 	}
@@ -239,7 +233,7 @@ public class Color
 	 * @param context
 	 * @return value of ColorCode
 	 */
-	public final String getColorCode(IContext context)
+	public final String getColorCode(com.mendix.systemwideinterfaces.core.IContext context)
 	{
 		return (String) getMendixObject().getValue(context, MemberNames.ColorCode.toString());
 	}
@@ -258,7 +252,7 @@ public class Color
 	 * @param context
 	 * @param colorcode
 	 */
-	public final void setColorCode(IContext context, String colorcode)
+	public final void setColorCode(com.mendix.systemwideinterfaces.core.IContext context, String colorcode)
 	{
 		getMendixObject().setValue(context, MemberNames.ColorCode.toString(), colorcode);
 	}
@@ -266,7 +260,7 @@ public class Color
 	/**
 	 * @return the IMendixObject instance of this proxy for use in the Core interface.
 	 */
-	public final IMendixObject getMendixObject()
+	public final com.mendix.systemwideinterfaces.core.IMendixObject getMendixObject()
 	{
 		return colorMendixObject;
 	}
@@ -274,7 +268,7 @@ public class Color
 	/**
 	 * @return the IContext instance of this proxy, or null if no IContext instance was specified at initialization.
 	 */
-	public final IContext getContext()
+	public final com.mendix.systemwideinterfaces.core.IContext getContext()
 	{
 		return context;
 	}
@@ -302,7 +296,7 @@ public class Color
 	/**
 	 * @return String name of this class
 	 */
-	public static String getType()
+	public static java.lang.String getType()
 	{
 		return "TestSuite.Color";
 	}
@@ -312,7 +306,7 @@ public class Color
 	 * @deprecated Use getMendixObject().getId().toLong() to get a unique identifier for this object.
 	 */
 	@Deprecated
-	public String getGUID()
+	public java.lang.String getGUID()
 	{
 		return "ID_" + getMendixObject().getId().toLong();
 	}
