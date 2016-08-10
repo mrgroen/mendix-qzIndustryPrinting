@@ -1,13 +1,13 @@
-/*jslint white:true, nomen:true, plusplus:true, vars:true */
+/*jslint white:true, nomen:true, plusplus:true, vars:true, unparam: true */
 /*jshint browser:true */
-/*global mx, define, require, browser, devel, console, document */
+/*global mx, define, require, browser, devel, console, document, window, alert */
 /*mendix */
 /*
     qzIndustryPrinting
     ========================
 
     @file      : qzIndustryPrinting.js
-    @version   : 1.0
+    @version   : 1.0.1
     @author    : Marcus Groen
     @date      : Wed, 08 Jul 2015 14:04:00 GMT
     @copyright : Incentro
@@ -27,7 +27,6 @@ define([
   "dojo/dom-construct", "dojo/_base/array", "dojo/_base/lang", "dojo/html", "dojo/_base/event",
 
   // External libraries
-  "qzIndustryPrinting/lib/jquery-1.11.2",
   "qzIndustryPrinting/lib/qzTray"
 
 ], function (
@@ -40,15 +39,12 @@ define([
   domConstruct, dojoArray, lang, html, event,
 
   // External libraries
-  _jQuery,
   _qzTray
 
 ) {
 
   "use strict";
-
-  var $ = _jQuery.noConflict(true);
-  var qzTray = _qzTray.load();
+  _qzTray.load();
 
   // Declare widget's prototype.
   return declare("qzIndustryPrinting.widget.qzIndustryPrinting", [_WidgetBase], {
@@ -82,21 +78,21 @@ define([
             params: {
               actionname: this.jsonMicroflow
             },
-            callback: lang.hitch(this,function(guid){
+            callback: lang.hitch(this,function mxDataActionCallback(guid){
               mx.data.get({
                 guid: guid,
-                callback: function(obj){
+                callback: function mxDataGetCallback(obj){
                   this._mxObj = obj;
                   this._addSubscriptions();
                 },
-                error: function(e){
+                error: function mxDataGetError(e){
                   if(e){
                     console.warn(e.description);
                   }
                 }
               },this);
             }),
-            error: function(e){
+            error: function mxDataActionError(e){
               if(e){
                 console.warn(e.description);
               }
@@ -112,21 +108,21 @@ define([
         window.qzLib.signRequest = function(toSign,callback){
           mx.data.create({
             entity: window.qzLib.signing.messageEntity,
-            callback: function(obj){
+            callback: function mxDataCreateCallback(obj){
               obj.set(window.qzLib.signing.messageAttribute, toSign);
               mx.data.save({
                 mxobj: obj,
-                callback: function(){
+                callback: function mxDataSaveCallback(){
                   mx.data.action({
                     params: {
                       applyto: "selection",
                       actionname: window.qzLib.signing.signRequestMicroflow,
                       guids: [obj.getGuid()]
                     },
-                    callback: function (returnObject) {
+                    callback: function mxDataActionCallback(returnObject) {
                       callback(returnObject);
                     },
-                    error: function (e) {
+                    error: function mxDataActionError(e) {
                       if (e) {
                         console.warn(e.description);
                       }
@@ -134,7 +130,7 @@ define([
                     }
                   });
                 },
-                error: function(e){
+                error: function mxDataSaveError(e){
                   if (e) {
                     console.warn(e.description);
                   }
@@ -142,7 +138,7 @@ define([
                 }
               },this);
             },
-            error: function(e){
+            error: function mxDataCreateError(e){
               if (e) {
                 console.warn(e.description);
               }
@@ -152,8 +148,8 @@ define([
         };
 
         // retrieve site certificate from database
-        if (typeof window.qzLib.siteCertificate === "undefined") {
-          this._execMF(null, this.siteCertificateMicroflow, function(obj){
+        if (window.qzLib.siteCertificate === undefined) {
+          this._execMF(null, this.siteCertificateMicroflow, function siteCertificateMicroflow(obj){
             // store site certificate in browser
             if (obj) {
               window.qzLib.siteCertificate = obj;
@@ -166,25 +162,25 @@ define([
 
       // mxui.widget._WidgetBase.update is called when context is changed or initialized. Implement to re-render and / or fetch data.
       update: function(obj, callback){
-        if (typeof callback !== "undefined") {
+        if (callback !== undefined) {
           callback();
         }
       },
 
       // mxui.widget._WidgetBase.enable is called when the widget should enable editing. Implement to enable editing if widget is input widget.
-      enable: function(){},
+      enable: function(){ return; },
 
       // mxui.widget._WidgetBase.enable is called when the widget should disable editing. Implement to disable editing if widget is input widget.
-      disable: function(){},
+      disable: function(){ return; },
 
       // mxui.widget._WidgetBase.resize is called when the pages layout is recalculated. Implement to do sizing calculations. Prefer using CSS instead.
-      resize: function(box){},
+      resize: function(box){ return; },
 
       // mxui.widget._WidgetBase.uninitialize is called when the widget is destroyed. Implement to do special tear-down work.
       uninitialize: function(){
         // Clean up listeners, helper objects, etc. There is no need to remove listeners added with this.connect / this.subscribe / this.own.
         if (this._handles.length > 0) {
-          dojoArray.forEach(this._handles, function (handle) {
+          dojoArray.forEach(this._handles, function unsubscribe(handle) {
             mx.data.unsubscribe(handle);
           });
         }
@@ -194,8 +190,8 @@ define([
       _sendCommand: function(){
         var jsonObj = null;
         try {
-          //TODO: use JSON attribute given in the widget parameters.
-          jsonObj = JSON.parse(this._mxObj.jsonData.attributes.JSON.value);
+          //Using JSON attribute given in the widget parameters.
+          jsonObj = JSON.parse(this._mxObj.jsonData.attributes[this.jsonAttribute].value);
         } catch(e) {
           console.warn("Failed parsing JSON: " + e.message);
         }
@@ -204,10 +200,10 @@ define([
           window.qzDoneFinding = function(){
             var commands = [];
             // loop commands
-            dojoArray.forEach(jsonObj.commands,function(value,key){
+            dojoArray.forEach(jsonObj.commands,function eachCommand(value,key){
               if (value.hasOwnProperty("chars")) {
                 var charsCommand = "";
-                dojoArray.forEach(value.chars,function(value,key){
+                dojoArray.forEach(value.chars,function eachChar(value,key){
                   charsCommand = charsCommand + window.qzLib.chr(value);
                 });
                 //window.qz.append(charsCommand);
@@ -237,21 +233,26 @@ define([
 
           if (this._mxObj !== null){
             var jsonEntitySubscription = mx.data.subscribe({
-              guid: this._mxObj.getGUID(),
-              callback: lang.hitch(this, function (guid) {
+              guid: this._mxObj.getGuid(),
+              callback: lang.hitch(this, function mxSubscribeCallback(guid) {
                 console.log("Recieved change on QZ print command entity: " + guid);
                 mx.data.get({
                   guid: guid,
-                  callback: function(obj){
+                  callback: function mxDataGetCallback(obj){
                     this._mxObj = obj;
                   },
-                  error: function(e){
+                  error: function mxDataGetError(e){
                     if(e){
                       console.warn(e.description);
                     }
                   }
                 },this);
-                this._sendCommand();
+                if (window.qzLib.isReady === true && window.qzLib.websocket.readyState !== undefined && window.qzLib.websocket.readyState === 1) {
+                  this._sendCommand();
+                } else {
+                  console.error("Unable to connect to QZ Tray, is it running?");
+                  alert("Unable to connect to QZ Tray, is it running?");
+                }
               })
             });
             this._handles.push(jsonEntitySubscription);
@@ -260,7 +261,7 @@ define([
       },
 
       // run a mendix microflow
-      _execMF: function(obj,mf,cb){
+      _execMF: function _execMF(obj,mf,cb){
           if (mf) {
               var params = {
                   applyto: "selection",
@@ -272,12 +273,12 @@ define([
               }
               mx.data.action({
                   params: params,
-                  callback: function (objs) {
+                  callback: function mxDataActionCallback(objs) {
                       if (cb) {
                           cb(objs);
                       }
                   },
-                  error: function (error) {
+                  error: function mxDataActionError(error) {
                       if (cb) {
                           cb();
                       }
@@ -294,4 +295,5 @@ define([
 });
 require(["qzIndustryPrinting/widget/qzIndustryPrinting"], function(){
     "use strict";
+    return;
 });

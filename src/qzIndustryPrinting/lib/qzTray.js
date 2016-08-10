@@ -1,12 +1,12 @@
-/*jslint white:true, nomen:true, plusplus:true, vars:true, regexp:true */
+/*jslint white:true, nomen:true, plusplus:true, vars:true, regexp:true, unparam: true */
 /*jshint browser:true */
-/*global mx, mxui, mendix, dojo, require, console, define, module, WebSocket, alert */
+/*global mx, mxui, mendix, dojo, require, console, define, module, WebSocket, alert, window */
 /*
     qzTray Dojo Lib
     ========================
 
     @file      : qzTray.js
-    @version   : 1.0
+    @version   : 1.0.1
     @author    : Marcus Groen
     @date      : Wed, 08 Jul 2015 14:04:00 GMT
     @copyright : Incentro
@@ -19,15 +19,15 @@
 define([ "dojo/_base/lang", "qzIndustryPrinting/lib/jquery-1.11.2"],
 function(lang, _jQuery) {
   "use strict";
-  
+
   var $ = _jQuery.noConflict(true);
-  
+
   return {
 
     "load": function(){
-      
+
       // We need to set a global variable, once loaded this will always be used!
-      if (typeof window.qzLib === "undefined" ) {
+      if (window.qzLib === undefined) {
         window.qzLib = {
 
           isReady: false,
@@ -61,9 +61,9 @@ function(lang, _jQuery) {
           chr: function (i) {
               return String.fromCharCode(i);
           },
-          
+
           getSiteCertificate: function (callback) {
-            if (typeof this.siteCertificate === "undefined") {
+            if (this.siteCertificate === undefined) {
               // QZ demo certificate.
               callback("-----BEGIN CERTIFICATE-----\n" +
                   "MIIFAzCCAuugAwIBAgICEAIwDQYJKoZIhvcNAQEFBQAwgZgxCzAJBgNVBAYTAlVT\n" +
@@ -129,36 +129,36 @@ function(lang, _jQuery) {
               callback(this.siteCertificate);
             }
           },
-          
-          signRequest: function (toSign, callback) {
+
+          signRequest: function signRequest(toSign, callback) {
             // not signed
             callback();
           },
-          
+
           socketError: function (event) {
             console.error('WebSocket error: ' + event.reason);
           },
-          
+
           socketClose: function (event) {
             console.log('WebSocket closed: ' + event.reason);
           },
-          
+
           qzNoConnection: function () {
             console.error("Unable to connect to QZ Tray, is it running?");
             alert("Unable to connect to QZ Tray, is it running?");
           },
-          
+
           isLoaded: function () {
-            return (typeof window.qz !== "undefined") ? true : false;
+            return (window.qz !== undefined) ? true : false;
           },
-          
+
           isPrinterSelected: function () {
-            return (this.isLoaded() && typeof window.qz.getPrinter() !== "undefined" &&  window.qz.getPrinter() !== undefined) ? true : false;
+            return (this.isLoaded() &&  window.qz.getPrinter() !== undefined) ? true : false;
           },
-          
+
           useDefaultPrinter: function () {
             if (this.isLoaded()) {
-              
+
               // Automatically gets called when "qz.findPrinter()" is finished.
               window.qz.qzDoneFinding = function() {
                 if (this.isPrinterSelected()) {
@@ -169,16 +169,16 @@ function(lang, _jQuery) {
                 // Remove reference to this function.
                 window.qz.qzDoneFinding = null;
               };
-              
+
               // Searches for default printer
               window.qz.findPrinter();
-              
+
             }
           },
-          
+
           deployQZ: function () {
               //Old standard of WebSocket used const CLOSED as 2, new standards use const CLOSED as 3, we need the newer standard for jetty
-              if (typeof WebSocket !== "undefined" && WebSocket.CLOSED !== null && WebSocket.CLOSED > 2) {
+              if (WebSocket !== undefined && WebSocket.CLOSED !== null && WebSocket.CLOSED > 2) {
                   console.log('Starting deploy of qz');
                   this.connectWebsocket(this.qzConfig.ports[this.qzConfig.portIndex]);
               } else {
@@ -250,7 +250,7 @@ function(lang, _jQuery) {
                   this.qzNoConnection();
               }
           },
-		  
+
 		  printBon: function (evt) {
 			  var message = JSON.parse(evt.data);
 
@@ -263,7 +263,7 @@ function(lang, _jQuery) {
                   // That means we have to deal with the listMessages separately from everything else.
                   if (message.method === 'listMessages') {
                       // Take the list of messages and add them to the qz object
-                      this.mapMethods(websocket, message.result);
+                      this.mapMethods(this.websocket, message.result);
 
                   } else {
                       // Got a return value from a call
@@ -314,13 +314,12 @@ function(lang, _jQuery) {
                       if (message.callback !== null) {
                           try {
                               console.log("Callbacking: " + message.callback);
-                              if (typeof window.qz[message.callback] !== "undefined") {
+                              if (window.qz[message.callback] !== undefined) {
                                 window.qz[message.callback].apply(this, message.init ? [message.method] : message.result);
-                              } else if (typeof window[message.callback] !== "undefined") {
+                              } else if (window[message.callback] !== undefined) {
                                 window[message.callback].apply(this, message.result);
                               } else {
-                                console.warn("Callback [" + message.callback + "] is not defined.");
-								printBon(evt);
+                                console.warn("Callback is not defined.");
                               }
                           } catch(err) {
                               console.error(err);
@@ -330,7 +329,7 @@ function(lang, _jQuery) {
 
                   console.log("Finished processing message");
 		  },
-	
+
           connectionSuccess: function (websocket) {
               console.log('Websocket connection successful');
 
@@ -352,92 +351,14 @@ function(lang, _jQuery) {
                 }
               });
 
-              websocket.onmessage = lang.hitch(this,function(evt) {
-				  
-			  printBon(evt);
-                  /*var message = JSON.parse(evt.data);
-
-                  if (message.error !== undefined) {
-                      console.log(message.error);
-                      return;
-                  }
-
-                  // After we ask for the list, the value will come back as a message.
-                  // That means we have to deal with the listMessages separately from everything else.
-                  if (message.method === 'listMessages') {
-                      // Take the list of messages and add them to the qz object
-                      this.mapMethods(websocket, message.result);
-
-                  } else {
-                      // Got a return value from a call
-                      console.log('Message:');
-                      console.log(message);
-
-                      if (typeof message.result === 'string') {
-                          //unescape special characters
-                          message.result = message.result.replace(/%5C/g, "\\").replace(/%22/g, "\"");
-
-                          //ensure boolean strings are read as booleans
-                          if (message.result === "true" || message.result === "false") {
-                              message.result = (message.result === "true");
-                          }
-
-                          if (message.result.substring(0, 1) === '[') {
-                              message.result = JSON.parse(message.result);
-                          }
-
-                          //ensure null is read as null
-                          if (message.result === "null") {
-                              message.result = null;
-                          }
-                      }
-
-                      if (message.callback !== 'setupMethods' && message.result !== undefined && message.result.constructor !== Array) {
-                          message.result = [message.result];
-                      }
-
-                      // Special case for getException
-                      if (message.method === 'getException') {
-                          var result = message.result;
-                          message.result = {
-                              getLocalizedMessage: function() {
-                                  return result;
-                              }
-                          };
-                      }
-
-                      if (message.callback === 'setupMethods') {
-                          console.log("Resetting function call");
-                          console.log(message.result);
-                          window.qz[message.method] = function() {
-                              return message.result;
-                          };
-                      }
-
-                      if (message.callback !== null) {
-                          try {
-                              console.log("Callbacking: " + message.callback);
-                              if (typeof window.qz[message.callback] !== "undefined") {
-                                window.qz[message.callback].apply(this, message.init ? [message.method] : message.result);
-                              } else if (typeof window[message.callback] !== "undefined") {
-                                window[message.callback].apply(this, message.result);
-                              } else {
-                                console.warn("Callback [" + message.callback + "] is not defined.");
-								
-                              }
-                          } catch(err) {
-                              console.error(err);
-                          }
-                      }
-                  }
-
-                  console.log("Finished processing message");
-              });*/
+              websocket.onmessage = lang.hitch(this,function onMessage(evt) {
+		            this.printBon(evt);
+              });
           },
 
-          createQZ: function (websocket) {
+          createQZ: function createQZ(websocket) {
               // Get list of methods from websocket
-              this.getSiteCertificate(lang.hitch(this,function(cert) {
+              this.getSiteCertificate(lang.hitch(this,function getSiteCertificate(cert) {
                   websocket.sendObj({method: 'listMessages', params: [cert]});
                   window.qz = {};
               }));
@@ -471,7 +392,7 @@ function(lang, _jQuery) {
                       var method = cb.name;
 
                       // Special case for IE, which does not have function.name property ..
-                      if (typeof method === "undefined") {
+                      if (method === undefined) {
                           method = cb.toString().match(/^function\s*([^\s(]+)/)[1];
                       }
 
@@ -489,14 +410,15 @@ function(lang, _jQuery) {
                   this.websocket.sendObj({method: _name, params: args, callback: cbName, init: (cbName === 'setupMethods')});
               });
           },
-          
+
           mapMethods: function (websocket, methods) {
               console.log('Adding ' + methods.length + ' methods to qz object');
               var x = 0;
+              var name, returnType, numParams;
               for(x = 0; x < methods.length; x++) {
-                  var name = methods[x].name;
-                  var returnType = methods[x].returns;
-                  var numParams = methods[x].parameters;
+                  name = methods[x].name;
+                  returnType = methods[x].returns;
+                  numParams = methods[x].parameters;
 
                   // Determine how many parameters there are and create method with that many
                   this.createMethod(name,numParams,returnType);

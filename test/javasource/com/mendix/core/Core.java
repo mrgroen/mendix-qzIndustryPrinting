@@ -26,6 +26,7 @@ import com.mendix.logging.ILogNode;
 import com.mendix.logging.LogSubscriber;
 import com.mendix.m2ee.api.IMxRuntimeRequest;
 import com.mendix.systemwideinterfaces.MendixException;
+import com.mendix.systemwideinterfaces.MendixRuntimeException;
 import com.mendix.systemwideinterfaces.IWebserviceResponse;
 import com.mendix.systemwideinterfaces.connectionbus.data.IDataTable;
 import com.mendix.systemwideinterfaces.connectionbus.requests.IMetaAssociationSchema;
@@ -62,16 +63,6 @@ public final class Core
 	public static LocalComponent getComponent()
 	{
 		return component;
-	}
-	
-	/**
-	 * Returns the mode in which the Mendix Business Server has been started.
-	 * @return the mode the Mendix Business Server is running in.
-	 */
-	@Deprecated
-	public static com.mendix.core.component.InternalCore.Mode getMode()
-	{
-		return InternalCore.getMode();
 	}
 	
 	public static boolean isInDevelopment()
@@ -475,21 +466,6 @@ public final class Core
 	 * Rollback changes of the object with the given id (asynchronously).
 	 * When the object's state is NORMAL: Removes the object from the cache, all performed changes without commit will be lost.
 	 * When the object's state is NEW: Removes the object from the database.
-	 * @param context the context.
-	 * @param id the identifier of the object to rollback.
-	 * @return returns the Future object.
-	 * @throws CoreException 
-	 */
-	@Deprecated
-	public static Future<IMendixObject> rollbackAsync(IContext context, IMendixIdentifier id) throws CoreException
-	{
-		return component.core().rollbackAsync(context, id);
-	}
-	
-	/**
-	 * Rollback changes of the object with the given id (asynchronously).
-	 * When the object's state is NORMAL: Removes the object from the cache, all performed changes without commit will be lost.
-	 * When the object's state is NEW: Removes the object from the database.
 	 * This action is not executed in a transaction.
 	 * @param context the context.
 	 * @param id the identifier of the object to rollback.
@@ -504,20 +480,6 @@ public final class Core
 	 * Rollback changes of the object with the given id (synchronously).
 	 * When the object's state is NORMAL: Removes the object from the cache, all performed changes without commit will be lost.
 	 * When the object's state is NEW: Removes the object from the database.
-	 * @param context the context.
-	 * @param id the identifier of the object to rollback.
-	 * @return returns the Future object.
-	 */
-	@Deprecated
-	public static IMendixObject rollback(IContext context, IMendixIdentifier id) throws CoreException
-	{
-		return component.core().rollback(context, id);
-	}
-
-	/**
-	 * Rollback changes of the object with the given id (synchronously).
-	 * When the object's state is NORMAL: Removes the object from the cache, all performed changes without commit will be lost.
-	 * When the object's state is NEW: Removes the object from the database.
 	 * This action is executed in a transaction.
 	 * @param context the context.
 	 * @param id the identifier of the object to rollback.
@@ -526,22 +488,6 @@ public final class Core
 	public static IMendixObject rollback(IContext context, IMendixObject object) throws CoreException
 	{
 		return component.core().rollback(context, object);
-	}
-	
-	/**
-	 * Removes the given objects from the database and server cache (synchronously).
-	 * Before events defined for these objects are executed before any object will be deleted and after events will be
-	 * executed after all objects have been deleted. 
-	 * @param context the context.
-	 * @param objects the objects to remove.
-	 * @return returns whether the remove succeeded.
-	 * @deprecated Replaced by {{@link #delete(IContext, IMendixObject...)}
-	 */
-	@SuppressWarnings("unused")
-	@Deprecated
-	public static boolean remove(IContext context, IMendixObject... objects) throws CoreException
-	{
-		return delete(context, objects);
 	}
 	
 	/**
@@ -1142,20 +1088,6 @@ public final class Core
 	 * @param superClass the name of the super class
 	 * @param typeHash the hash of the name of the type to check
 	 * @return returns true if type is a subclass of superClass or if type equals superClass
-	 * @deprecated Use the method call with a short as parameter instead.
-	 * @throws CoreException 
-	 */
-	@Deprecated
-	public static boolean isSubClassOf(String superClass, int typeHash)
-	{
-		return isSubClassOf(superClass, (short) typeHash);
-	}
-	
-	/**
-	 * Checks whether a type is a subclass of or equal to a potential super class.
-	 * @param superClass the name of the super class
-	 * @param typeHash the hash of the name of the type to check
-	 * @return returns true if type is a subclass of superClass or if type equals superClass
 	 * @throws CoreException 
 	 */
 	public static boolean isSubClassOf(String superClass, short typeHash)
@@ -1271,15 +1203,6 @@ public final class Core
 	}
 	
 	/**
-	 * @deprecated use createSystemContext instead 
-	 */
-	@Deprecated
-	public static IContext getSystemContext()
-	{
-		return component.core().createSystemContext();
-	}
-	
-	/**
 	 * Returns the context of the system session (this is always a sudo context).
 	 * The system session has no associated user or user roles.
 	 * @return returns the system session context. 
@@ -1346,20 +1269,6 @@ public final class Core
 	 * Login user with the given parameters.
 	 * @param userName the user name.
 	 * @param password the password.
-	 * @param locale the locale.
-	 * @param currentSessionId current session UUID.
-	 * @return the created session if login is successful.
-	 */
-	 @Deprecated
-	public static ISession login(String userName, String password, @SuppressWarnings("unused") String locale, String currentSessionId) throws CoreException
-	{
-		return Core.login(userName, password, currentSessionId);
-	}
-	
-	/**
-	 * Login user with the given parameters.
-	 * @param userName the user name.
-	 * @param password the password.
 	 * @param currentSessionId current session UUID.
 	 * @return the created session if login is successful.
 	 */
@@ -1367,13 +1276,7 @@ public final class Core
 	{
 		return component.core().login(userName, password, currentSessionId);
 	}
-	
-	@Deprecated
-	public static ISession login(String userName, String password, @SuppressWarnings("unused") String locale, IMxRuntimeRequest request) throws CoreException
-	{
-		return Core.login(userName, password, request);
-	}
-	
+
 	public static ISession login(String userName, String password, IMxRuntimeRequest request) throws CoreException
 	{
 		return component.core().login(userName, password, request);
@@ -1402,22 +1305,6 @@ public final class Core
 	
 	/**
 	 * Initialize a new session for the given user.
-	 * @deprecated use initializeSession(user, currentSessionId) instead.
-	 * @param context the context.
-	 * @param user the user for which the session should be initialized.
-	 * @param currentSessionId id of the current session, will be used to transfer data when current session is associated with a guest user.
-	 * @param locale determines the user's language.
-	 * 			The existing language remains set if available. The default language is used when no language was set and locale is null or empty.
-	 * @return the created session.
-	 */
-	 @Deprecated
-	public static ISession initializeSession(@SuppressWarnings("unused") IContext context, IUser user, String currentSessionId, @SuppressWarnings("unused") String locale) throws CoreException
-	{
-		return Core.initializeSession(user, currentSessionId);
-	}
-	
-	/**
-	 * Initialize a new session for the given user.
 	 * @param user the user for which the session should be initialized.
 	 * @param currentSessionId id of the current session, will be used to transfer data when current session is associated with a guest user.
 	 * @return the created session.
@@ -1436,65 +1323,52 @@ public final class Core
 	{
 		return component.core().initializeGuestSession();
 	}
-	
+
 	/**
-	 * Import an xml stream, map this stream to domain objects and store those object in the Mendix database.
+	 * Import an XML stream, map this stream to domain model objects and store those objects in the Mendix database.
 	 * @param context the context.
-	 * @param xmlStream the xml stream to map and store.
-	 * @param xmlToDomainMappingName name of the mapping from xml to domain objects (as defined in the Mendix Business Modeler, e.g. "Orders.MyMapping").
+	 * @param xmlStream the XML stream to map and store.
+	 * @param importMappingName name of the mapping document, containing the mapping from XML to domain model objects (as defined in the Mendix Modeler, e.g. "Orders.MyMapping").
 	 * @param mappingParameter parameter object used during the mapping (optional)
-	 * @deprecated Don't use this, it will be removed in the future. Use the version that allows you to pass a shouldValidate boolean.
+	 * @param shouldValidate whether the XML should be validated.
+	 * @deprecated Please use importStream instead.
 	 */
-	@Deprecated
-	public static void importXmlStream(IContext context, InputStream xmlStream, String xmlToDomainMappingName, IMendixObject mappingParameter)
+	@Deprecated   
+	public static void importXmlStream(IContext context, InputStream xmlStream, String importMappingName, IMendixObject mappingParameter, boolean shouldValidate)
 	{
-		integration.importXmlStream(context, xmlStream, xmlToDomainMappingName, mappingParameter, false);
+		integration.importStream(context, xmlStream, importMappingName, mappingParameter, -1, shouldValidate);
 	}
 
 	/**
-	 * Import an xml stream, map this stream to domain objects and store those object in the Mendix database.
+	 * Import an XML stream, map this stream to domain model objects and store those objects in the Mendix database.
 	 * @param context the context.
-	 * @param xmlStream the xml stream to map and store.
-	 * @param xmlToDomainMappingName name of the mapping from xml to domain objects (as defined in the Mendix Business Modeler, e.g. "Orders.MyMapping").
+	 * @param xmlStream the XML stream to map and store.
+	 * @param importMappingName name of the mapping document, containing the mapping from XML to domain model objects (as defined in the Mendix Modeler, e.g. "Orders.MyMapping").
 	 * @param mappingParameter parameter object used during the mapping (optional)
-	 * @param shouldValidate whether the xml should be validated.
+	 * @param storeResultInVariable whether to store the result of the XML mapping in variable which will be returned by this method.
+	 * @param hasListReturnValue indicates whether the return value of the XML mapping is of type List.
+	 * @param shouldValidate whether the XML should be validated.
+	 * @deprecated Please use importStream instead.
 	 */
-	public static void importXmlStream(IContext context, InputStream xmlStream, String xmlToDomainMappingName, IMendixObject mappingParameter, boolean shouldValidate)
-	{
-		integration.importXmlStream(context, xmlStream, xmlToDomainMappingName, mappingParameter, shouldValidate);
-	}
-	
-	/**
-	 * Import an xml stream, map this stream to domain objects and store those object in the Mendix database.
-	 * @param context the context.
-	 * @param xmlStream the xml stream to map and store.
-	 * @param xmlToDomainMappingName name of the mapping from xml to domain objects (as defined in the Mendix Business Modeler, e.g. "Orders.MyMapping").
-	 * @param mappingParameter parameter object used during the mapping (optional)
-	 * @param storeResultInVariable whether to store the result of the xml mapping in variable which will be returned by this method.
-	 * @param hasListReturnValue indicates whether the return value of the xml mapping is of type List.
-	 * @deprecated Don't use this, it will be removed in the future. Use the version that allows you to pass a shouldValidate boolean.
-	 */
-	@Deprecated
-	public static Object importXmlStream(IContext context, InputStream xmlStream, String xmlToDomainMappingName, IMendixObject mappingParameter,
-			boolean storeResultInVariable, boolean hasListReturnValue)
-	{
-		return integration.importXmlStream(context, xmlStream, xmlToDomainMappingName, mappingParameter, storeResultInVariable, -1, hasListReturnValue, false);
-	}
-
-	/**
-	 * Import an xml stream, map this stream to domain objects and store those object in the Mendix database.
-	 * @param context the context.
-	 * @param xmlStream the xml stream to map and store.
-	 * @param xmlToDomainMappingName name of the mapping from xml to domain objects (as defined in the Mendix Business Modeler, e.g. "Orders.MyMapping").
-	 * @param mappingParameter parameter object used during the mapping (optional)
-	 * @param storeResultInVariable whether to store the result of the xml mapping in variable which will be returned by this method.
-	 * @param hasListReturnValue indicates whether the return value of the xml mapping is of type List.
-	 * @param shouldValidate whether the xml should be validated.
-	 */
-	public static Object importXmlStream(IContext context, InputStream xmlStream, String xmlToDomainMappingName, IMendixObject mappingParameter,
+	@Deprecated   
+	public static Object importXmlStream(IContext context, InputStream xmlStream, String importMappingName, IMendixObject mappingParameter,
 			boolean storeResultInVariable, boolean hasListReturnValue, boolean shouldValidate)
 	{
-		return integration.importXmlStream(context, xmlStream, xmlToDomainMappingName, mappingParameter, storeResultInVariable, -1, hasListReturnValue, shouldValidate);
+		return integration.importXmlStream(context, xmlStream, importMappingName, mappingParameter, storeResultInVariable, -1, hasListReturnValue, shouldValidate);
+	}
+
+	/**
+	 * Import an XML or JSON stream, map this stream to domain model objects and store those objects in the Mendix database.
+	 * @param context the context.
+	 * @param stream the stream to map and store.
+	 * @param importMappingName name of the mapping document, containing the mapping from XML or JSON to domain model objects (as defined in the Mendix Modeler, e.g. "Orders.MyMapping").
+	 * @param mappingParameter parameter object used during the mapping (optional).
+	 * @param shouldValidate whether the XML should be validated. Validation can only be applied to XML.
+	 * @throws MendixRuntimeException this exception is thrown when an error occurs.
+	 */
+	public static List<IMendixObject> importStream(IContext context, InputStream stream, String importMappingName, IMendixObject mappingParameter, boolean shouldValidate)
+	{
+		return integration.importStream(context, stream, importMappingName, mappingParameter, -1, shouldValidate);
 	}
 	
 	/**
@@ -1744,16 +1618,6 @@ public final class Core
 	}
 	
 	/**
-	 * Returns current number of concurrent users (live sessions).
-	 * @deprecated use getNumberConcurrentSessions instead.
-	 */
-	@Deprecated
-	public static long getNumberConcurrentUsers() 
-	{
-		return Core.getNumberConcurrentSessions();
-	}
-	
-	/**
 	 * Returns current number of concurrent sessions.
 	 */
 	public static long getNumberConcurrentSessions()
@@ -1925,20 +1789,5 @@ public final class Core
 	public static void unregisterProfiler() 
 	{
 		component.core().unregisterProfiler();
-	}
-	
-	/**
-	 * Removes the object with the given id from the database and server cache (asynchronously).
-	 * @param context the context.
-	 * @param id id of the object to remove.
-	 * @return returns the Future object.
-	 * @deprecated use Core.deleteAsync() instead. This new version does not allow passing an identifier but only objects, 
-	 * however within this deprecated method the object is simply retrieved using Core.retrieveId() as well.
-	 * To make this perform better, you should gather ids and retrieve all objects with Core.retrieveIdList() and then use Core.deleteAsync using the list. 
-	 */
-	@Deprecated
-	public static Future<Boolean> removeAsync(IContext context, IMendixIdentifier id, boolean useDeleteBehavior) throws CoreException
-	{
-		return component.core().removeAsync(context, id, useDeleteBehavior);
 	}
 }
